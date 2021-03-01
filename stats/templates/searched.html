@@ -1,0 +1,71 @@
+ {% extends 'homepage.html' %} {% block content %}
+<br>{% load static %}
+
+<div class=" container" style="border: black">
+    <form method="get"  action="/search/" class="card card-sm">
+        <div class="card-body row no-gutters align-items-center ">
+            <div class="col-auto ">
+                <i class="fas fa-search h4 text-body "></i>
+            </div>
+            <!--end of col-->
+            <div class="col ">
+                {{sfrm.as_p }}
+            </div>
+            <!--end of col-->
+            <div class="col-auto ">
+                <button class="btn btn-lg btn-success " type="submit ">Search</button>
+            </div>
+            <!--end of col-->
+        </div>
+
+
+    </form>
+
+</div>
+
+<br>
+<p <i class="fas fa-staylinked text-left">
+    </i> Seacrhed Results  on {{se}}</p>
+<br>
+ {% if si|length == 0  and ii|length == 0 %}
+ <div classs="Text center"><h3>No result found please try other keyword</h3></div>
+ {% else %}
+<div class="container">
+
+        {% for i in si %}
+
+        <div class="list-group">
+            <a href="/statpage/{{i.id}}"  class="list-group-item list-group-item-action flex-column align-items-start " style="border: solid;">
+
+                <h5 class="text-left" style="font-family: 'Source Serif Pro', serif; color:rgb(0, 0, 10);">
+                    <i class="fas fa-chart-bar fa-2x fa-color"></i>
+                     {{i.s_head_tittle }} </h5>
+                    <p class="text-left" style="margin-left: 48px;font-family: 'Source Serif Pro', serif;">{{ i.s_head_subtittle }}
+                    </p>
+
+            </a>
+        </div>
+        <br>
+
+        {% endfor %} {% for j in ii %}
+
+        <div class="list-group">
+            <a href="/infopage/{{j.id}}"  class="list-group-item list-group-item-action flex-column align-items-start " style="border: solid;">
+
+                <h5 class="text-left" style="font-family: 'Source Serif Pro', serif; color:rgb(0, 0, 10);">
+                    <i class="fas fa-info-circle  fa-2x fa-color"></i>
+                    {{ j.i_head_tittle }}</h5>
+                    <p class="text-left" style="margin-left: 48px;font-family: 'Source Serif Pro', serif;">{{ j.i_sub_tittle }}
+                    </p>
+
+            </a>
+
+        </div>
+        <br>
+
+
+        {% endfor %}
+    </div>
+ {% endif %}
+
+ {% endblock %}

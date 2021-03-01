@@ -1,0 +1,33 @@
+{% extends 'homepage.html' %} {% block content %}
+<br>{% load static %}
+
+<div class=" container" style="border: black">
+    <form action=" " method="get" class="card card-sm">
+        <div class="card-body row no-gutters align-items-center ">
+            <div class="col-auto ">
+                <i class="fas fa-search h4 text-body "></i>
+            </div>
+            <!--end of col-->
+            <div class="col ">
+                {{ sfrm.as_p}}
+            </div>
+            <!--end of col-->
+            <div class="col-auto ">
+                <button class="btn btn-lg btn-success " type="submit ">Search</button>
+            </div>
+            <!--end of col-->
+
+        </div>
+
+    </form>
+
+</div>
+
+<br>
+<p <i class="fas fa-staylinked text-left">
+    </i> Seacrhed Results.</p>
+<h4 class="Text-center">Not found anyhthing on {{ se }}</h4>
+<br>
+
+</div>
+{% endblock %}

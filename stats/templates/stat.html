@@ -1,0 +1,235 @@
+{% extends 'homepage.html' %} {% block content %} {% load static %}{% autoescape off %}  {% load str_list %}
+<br>
+<div class="container">
+    <div class="text-left" style="margin-top: 39px;">
+
+        <h2 class="display-5" style="font-family: 'Source Serif Pro', serif;">
+            {{ st.s_head_tittle }}
+        </h2>
+
+        <p style="font-family: 'Lato', sans-serif;
+font-family: 'Source Serif Pro', serif;">
+            {{ st.s_head_subtittle }}
+        </p>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-8">
+            {% if st.x_pts %}
+            <div id="container1" style="width:100%; height:400px;"></div>
+<script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const chart = Highcharts.chart('container1', {
+                            chart: {
+                                type: '{{ st.graph }}',
+                                  options3d:{
+                            enabled:true
+                            }
+                            },
+                             credits: {
+                        text: 'MetricMint.com',
+                        href: '',
+                        position: {
+                            align: 'right'
+                           }
+                        },
+                            title: {
+                                text: '{{ st.graph_tittle }}'
+                            },
+                            xAxis: {
+                                categories: [{% for x in st.x_pts|str_list %}'{{x}}', {% endfor %}],
+                                title: {
+                                    text: '{{st.x_axis_tittle}}',
+                                 }
+                            },
+                               yAxis: {
+                            title: {
+                                text: '{{ st.y_axistittle }}'
+                            }
+                        },
+                               series: [{
+                            name: '{{ st.name }}',
+                            negativeColor: 'red',
+                            data: [{% for y in st.y_pts|str_list %}{{y}}, {% endfor %}]
+                        },{
+                            name: '{{ st.name1 }}',
+                            negativeColor: 'red',
+                            data: [{% for y1 in st.y_pts1|str_list %}{{y1}}, {% endfor %}]
+                        },{
+                          name: '{{ st.name2 }}',
+                            negativeColor: 'red',
+                            data: [{% for y2 in st.y_pts2|str_list %}{{y2}}, {% endfor %}]
+                        },{
+                          name: '{{ st.name3 }}',
+                            negativeColor: 'red',
+                            data: [{% for y3 in st.y_pts3|str_list %}{{y3}}, {% endfor %}]
+                        },{
+                           name: '{{ st.name4 }}',
+                            negativeColor: 'red',
+                            data: [{% for y4 in st.y_pts4|str_list %}{{y4}}, {% endfor %}]
+                        },{
+                        name: '{{ st.name5 }}',
+                            negativeColor: 'red',
+                            data: [{% for y5 in st.y_pts5|str_list %}{{y5}}, {% endfor %}]
+                        }]
+                        });
+                    });
+
+</script>
+
+            {% else %}
+            <div id="container2" style="width:100%; height:400px;"></div>
+    <pre id="csv" style="display:none">{{ st.s_csv }}</pre>
+ <script>
+        Highcharts.chart('container2', {
+
+           title: {
+                                text: '{{ st.graph_tittle }}'
+                            },
+                            xAxis: {
+
+                                title: {
+                                    text: '{{st.x_axis_tittle}}',
+                                 }
+                            },
+                               yAxis: {
+                            title: {
+                                text: '{{ st.y_axistittle }}'
+                            }
+                        },
+            credits: {
+                        text: 'MetricMint.com',
+                        href: '',
+                        position: {
+                            align: 'right'
+                           }
+                        },
+            data: {
+                csv: document.getElementById('csv').innerHTML
+            },
+
+           chart: {
+                                type: '{{ st.graph }}',
+                                  options3d:{
+                            enabled:true
+                            }
+                            },
+        });
+    </script>
+            {% endif %}
+
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card" style="height: 26rem; margin-left:10px;">
+
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-globe-europe"></i> Graph</h5>
+                    <p class="card-text"> {{ st.graph_tittle }}</p>
+
+
+                    <h5 class="card-title"><i class="fas fa-id-card"></i> publisher</h5>
+                    <p class="card-text">{{ st.s_publisher}}</p>
+
+
+                    <h5 class="card-title"><i class="fas fa-list-ul"></i> category</h5>
+                    <p class="card-text">{{ st.s_Category }} {% if st.s_subcategory %} -{{ st.s_subcategory }} {% else %} {% endif %}</p>
+
+                    <h5 class="card-title"><i class="far fa-clock"></i>date</h5>
+                    <p class="card-text">{{ st.s_date }}</p>
+
+                    <h5 class="card-title"><i class="fas fa-external-link-square-alt"></i> source</h5>
+                    <a href="{{ st.s_src1 }}" class="primary">LINK</a>
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
+ {% if si|length > 1 %}
+
+<div class="container">
+
+    <h1 class="display-4 text-left" style="margin-top: 39px;">Related to your Search</h1>
+
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            {% for i in si %}
+            <div class="swiper-slide">
+                <div class="card green darken-3">
+
+                    <!--Card image-->
+                    <div class="view">
+                        <img src="{% static  '/DEFAULTGRAPH.png' %}" class="card-img-top" alt="photo">
+                        <a href="/statpage/{{i.id}}" >
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <!--Card content-->
+                    <div class="card-body text-center">
+                        <!--Title-->
+                        <h4 class="card-title white-text">{{ si.s_head_tittle }}</h4>
+                        <!--Text-->
+                        <p class="card-text white-text">{{ si.s_head_subtittle }}</p>
+                        <a href="/statpage/{{i.id}}"  class="btn btn-outline-white btn-md waves-effect">Read more</a>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        loop: true,
+        slidesPerView: 'auto',
+        coverflowEffect: {
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+        },
+    });
+    </script>
+{% else %}
+<p></p>
+{% endif%}
+
+<br>
+<div class="container" style="margin-top: 39px; border: black">
+    <form action="/search/" method="get" class="card card-sm">
+    <div class="card-body row no-gutters align-items-center ">
+        <div class="col-auto ">
+            <i class="fas fa-search h4 text-body "></i>
+        </div>
+        <!--end of col-->
+        <div class="col ">
+            {{ sfrm.as_p }}
+        </div>
+        <!--end of col-->
+        <div class="col-auto ">
+            <button class="btn btn-lg btn-success " type="submit">Search</button>
+        </div>
+        <!--end of col-->
+    </div>
+    </form>
+
+</div>
+{% endautoescape %}
+
+{% endblock %}

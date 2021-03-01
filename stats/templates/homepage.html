@@ -1,0 +1,216 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/dumbbell.js"></script>
+<script src="https://code.highcharts.com/modules/lollipop.js"></script>
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src= "https://code.highcharts.com/highcharts-more.js"></script>
+
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/offline-exporting.js"></script>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+    <link rel="stylesheet" href="{% static  'style.css' %}">
+    <title>Homepage</title>
+</head>
+
+<body>
+
+
+    <header class="radius">
+
+        <div class="w3-center  w3-xxlarge w3-hide-small  logo">
+
+            <a href="/" class=""><img src="{% static '/logo4.PNG' %}" style="height:70px; margin: 20px;"></a>
+        </div>
+        <!-- Navbar -->
+        <div class="w3-topleft w3-xlarge w3-hide-medium w3-hide-large ">
+            <a href="/" class="w3-bar-item w3-button w3-padding-large "><img src="{% static '/logo4.PNG' %} " style="height:70px; "></a>
+        </div>
+
+
+        <div class="w3-center">
+
+
+
+
+            <!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
+
+
+
+            <script>
+                function openNav() {
+                    document.getElementById("myNav").style.width = "100%";
+                }
+
+                function closeNav() {
+                    document.getElementById("myNav").style.width = "0%";
+                }
+            </script>
+
+            <section>
+                <br>
+
+
+
+                <br>
+                <br>
+
+
+
+            </section>
+    </header>
+    <br> {% block content %}
+    <div class="container">
+
+        <div class="text-center" style="margin-top: 15px;">
+            <h1 class="h1 text-black">NO. 1 STATISTICS AND GRAPH SURVEY</h1>
+            <h5 class="h5 text-black">NO. 1 STATISTICS AND GRAPH SURVEY</h5>
+        </div>
+
+        <br>
+        <div class=" container" style="border: black">
+            <form method='get'  action="/search/"  class="card card-sm">
+                <div class="card-body row no-gutters align-items-center ">
+                    <div class="col-auto ">
+                        <i class="fas fa-search h4 text-body "></i>
+                    </div>
+                    <!--end of col-->
+                    <div class="col ">
+                        {{ sfrm.as_p }}
+                    </div>
+                    <!--end of col-->
+                    <div class="col-auto ">
+                        <button class="btn btn-lg btn-success " type="submit ">Search</button>
+                    </div>
+                    <!--end of col-->
+                </div>
+            </form>
+
+        </div>
+        <div class="container">
+
+            <h1 class="display-4 text-center" style="margin-top: 6px;">Recent Data</h1>
+
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    {% for i in st %}
+
+                    <div class="swiper-slide">
+                        <div class="card green darken-3">
+
+                            <!--Card image-->
+                            <div class="view">
+                                <img src="{% static  '/DEFAULTGRAPH.png'  %}" class="card-img-top" alt="photo">
+                                <a href="/statpage/{{i.id}}">
+                                    <div class="mask rgba-white-slight"></div>
+                                </a>
+                            </div>
+
+                            <!--Card content-->
+                            <div class="card-body text-center">
+                                <!--Title-->
+                                <h4 class="card-title white-text">{{ i.s_head_tittle }}</h4>
+                                <!--Text-->
+                                <p class="card-text white-text">{{ i.s_head_subtittle }}</p>
+                                <a href="/statpage/{{i.id}}" class="btn btn-outline-white btn-md waves-effect">Read more</a>
+                            </div>
+
+                        </div>
+                    </div> {% endfor %} {% for j in it %}
+                    <div class="swiper-slide">
+                        <div class="card green darken-3">
+
+                            <!--Card image-->
+                            <div class="view">
+                                <img src="{% static '/DEFAULTINFO.png' %}" class="card-img-top" alt="photo">
+                                <a href="/infopage/{{j.id}}">
+                                    <div class="mask rgba-white-slight"></div>
+                                </a>
+                            </div>
+
+                            <!--Card content-->
+                            <div class="card-body text-center">
+                                <!--Title-->
+                                <h4 class="card-title white-text">{{ j.i_head_tittle }}</h4>
+                                <!--Text-->
+                                <p class="card-text white-text">{{ j.i_sub_tittle }}</p>
+                                <a href="/infopage/{{j.id}}"class="btn btn-outline-white btn-md waves-effect">Read more</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <script>
+            var swiper = new Swiper('.swiper-container', {
+                effect: 'coverflow',
+                grabCursor: true,
+                centeredSlides: true,
+                loop: true,
+                slidesPerView: 'auto',
+                coverflowEffect: {
+                    rotate: 50,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 1,
+                    slideShadows: true,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+            });
+        </script>
+        {% endblock %}
+        <footer class="bg-light text-center text-lg-left" style="margin-top: 10px;">
+            <!-- Copyright -->
+            <div class="text-center p-3" style="background-color: rgb(255, 255, 255);">
+                <div class="w3-center  w3-xxlarge w3-hide-small  logo">
+
+                    <a href="/" class=""><img src="{% static '/logo4.PNG' %}" style="height:70px; margin: 20px;"></a>
+                </div>
+                <a class="text-dark" href="/">About us</a>
+            </div>
+
+            <!-- Copyright -->
+        </footer>
+
+
+        <!-- JQuery -->
+        <script type="text/javascript " src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js "></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript " src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js "></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript " src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js "></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript " src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js "></script>
+</body>
+
+</html>
